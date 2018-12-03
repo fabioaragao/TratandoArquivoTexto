@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnescolhaarquivo = new System.Windows.Forms.Button();
+            this.btnescolhaorigem = new System.Windows.Forms.Button();
             this.txtescolhearquivo = new System.Windows.Forms.TextBox();
             this.ofdescolhaarquivo = new System.Windows.Forms.OpenFileDialog();
             this.btnSair = new System.Windows.Forms.Button();
@@ -39,8 +40,9 @@
             this.rbCopiar = new System.Windows.Forms.RadioButton();
             this.rbLer = new System.Windows.Forms.RadioButton();
             this.gbDestino = new System.Windows.Forms.GroupBox();
-            this.txtdestino = new System.Windows.Forms.TextBox();
             this.btnescolherdestino = new System.Windows.Forms.Button();
+            this.txtdestino = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbDestino.SuspendLayout();
@@ -48,7 +50,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnescolhaarquivo);
+            this.groupBox1.Controls.Add(this.btnescolhaorigem);
             this.groupBox1.Controls.Add(this.txtescolhearquivo);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -56,17 +58,17 @@
             this.groupBox1.Size = new System.Drawing.Size(458, 52);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Escolha o seu arquivo";
+            this.groupBox1.Text = "Escolha o arquivo:";
             // 
-            // btnescolhaarquivo
+            // btnescolhaorigem
             // 
-            this.btnescolhaarquivo.Location = new System.Drawing.Point(401, 20);
-            this.btnescolhaarquivo.Name = "btnescolhaarquivo";
-            this.btnescolhaarquivo.Size = new System.Drawing.Size(51, 23);
-            this.btnescolhaarquivo.TabIndex = 1;
-            this.btnescolhaarquivo.Text = "...";
-            this.btnescolhaarquivo.UseVisualStyleBackColor = true;
-            this.btnescolhaarquivo.Click += new System.EventHandler(this.btnescolhaarquivo_Click);
+            this.btnescolhaorigem.Location = new System.Drawing.Point(401, 20);
+            this.btnescolhaorigem.Name = "btnescolhaorigem";
+            this.btnescolhaorigem.Size = new System.Drawing.Size(51, 23);
+            this.btnescolhaorigem.TabIndex = 1;
+            this.btnescolhaorigem.Text = "...";
+            this.btnescolhaorigem.UseVisualStyleBackColor = true;
+            this.btnescolhaorigem.Click += new System.EventHandler(this.btnescolhaarquivo_Click);
             // 
             // txtescolhearquivo
             // 
@@ -135,6 +137,7 @@
             this.rbCopiar.TabStop = true;
             this.rbCopiar.Text = "Copiar";
             this.rbCopiar.UseVisualStyleBackColor = true;
+            this.rbCopiar.CheckedChanged += new System.EventHandler(this.rbCopiar_CheckedChanged);
             // 
             // rbLer
             // 
@@ -157,14 +160,7 @@
             this.gbDestino.Size = new System.Drawing.Size(458, 58);
             this.gbDestino.TabIndex = 4;
             this.gbDestino.TabStop = false;
-            this.gbDestino.Text = "Escolha o destino para o arquivo";
-            // 
-            // txtdestino
-            // 
-            this.txtdestino.Location = new System.Drawing.Point(6, 22);
-            this.txtdestino.Name = "txtdestino";
-            this.txtdestino.Size = new System.Drawing.Size(389, 22);
-            this.txtdestino.TabIndex = 1;
+            this.gbDestino.Text = "Escolha o destino para o arquivo:";
             // 
             // btnescolherdestino
             // 
@@ -174,17 +170,36 @@
             this.btnescolherdestino.TabIndex = 2;
             this.btnescolherdestino.Text = "...";
             this.btnescolherdestino.UseVisualStyleBackColor = true;
+            this.btnescolherdestino.Click += new System.EventHandler(this.btnescolherdestino_Click);
+            // 
+            // txtdestino
+            // 
+            this.txtdestino.Location = new System.Drawing.Point(6, 22);
+            this.txtdestino.Name = "txtdestino";
+            this.txtdestino.Size = new System.Drawing.Size(389, 22);
+            this.txtdestino.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 266);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Ver.: 1.0.0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 288);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.gbDestino);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnSair);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tratando com Arquivos";
@@ -195,13 +210,14 @@
             this.gbDestino.ResumeLayout(false);
             this.gbDestino.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnescolhaarquivo;
+        private System.Windows.Forms.Button btnescolhaorigem;
         private System.Windows.Forms.TextBox txtescolhearquivo;
         private System.Windows.Forms.OpenFileDialog ofdescolhaarquivo;
         private System.Windows.Forms.Button btnSair;
@@ -213,6 +229,7 @@
         private System.Windows.Forms.GroupBox gbDestino;
         private System.Windows.Forms.Button btnescolherdestino;
         private System.Windows.Forms.TextBox txtdestino;
+        private System.Windows.Forms.Label label1;
     }
 }
 
