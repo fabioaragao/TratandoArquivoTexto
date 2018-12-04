@@ -96,3 +96,5 @@ namespace TratandoArquivoTexto
         }
     }
 }
+
+//Final do projeto
