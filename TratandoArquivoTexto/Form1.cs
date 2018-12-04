@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TratandoArquivoTexto
@@ -49,8 +43,6 @@ namespace TratandoArquivoTexto
 
             if(rbCopiar.Checked)
             {
-                //File.Copy(caminhoOrigem, caminhoDestino);
-
                 var caminhoOrigem = txtescolhearquivo;
                 
                 var caminhoDestino = txtdestino;
@@ -61,6 +53,17 @@ namespace TratandoArquivoTexto
                 MessageBox.Show("Arquivo copiado com exito!", "Sucesso!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
                 txtescolhearquivo.Text = "";
                 txtdestino.Text = "";
+            }
+
+            if (rbLer.Checked)
+            {
+                StreamReader arquivo = new StreamReader(caminhoOrigem, Encoding.Default);
+                frmLeituraArquivo conteudo = new frmLeituraArquivo();
+                conteudo.Show();
+                while (!arquivo.EndOfStream)
+                {
+                    conteudo.lbLeituraArquivo.Items.Add(arquivo.ReadLine());
+                }
             }
         }
 
