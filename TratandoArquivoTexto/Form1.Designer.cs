@@ -74,6 +74,7 @@
             // 
             this.txtescolhearquivo.Location = new System.Drawing.Point(6, 21);
             this.txtescolhearquivo.Name = "txtescolhearquivo";
+            this.txtescolhearquivo.ReadOnly = true;
             this.txtescolhearquivo.Size = new System.Drawing.Size(389, 22);
             this.txtescolhearquivo.TabIndex = 0;
             // 
@@ -186,7 +187,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Ver.: 1.0.0";
+            this.label1.Text = "Ver.: 1.0.1";
             // 
             // Form1
             // 
