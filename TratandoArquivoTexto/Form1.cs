@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -12,16 +13,19 @@ namespace TratandoArquivoTexto
             InitializeComponent();
             gbDestino.Visible = false;
         }
-                     
+
         string nomedoArquivo = "";
         string caminhoOrigem = "";
         string caminhoDestino = "";
 
-        private void btnescolhaarquivo_Click(object sender, EventArgs e)
+        private void Btnescolhaarquivo_Click(object sender, EventArgs e)
         {
-            OpenFileDialog escolher = new OpenFileDialog();
-            escolher.Title = "Selecione o arquivo";
-            escolher.InitialDirectory = @"C:\";
+            OpenFileDialog escolher = new OpenFileDialog
+            {
+                Title = "Selecione o arquivo",
+                InitialDirectory = @"C:\",
+                Filter = "Arquivos de texto(*.txt)|*.txt"
+            };
             DialogResult resposta = escolher.ShowDialog();
             if (resposta == DialogResult.OK)
             {
@@ -29,50 +33,70 @@ namespace TratandoArquivoTexto
                 txtescolhearquivo.Text = caminhoOrigem.ToString();
                 nomedoArquivo = Path.GetFileName(escolher.FileName);
             }
-
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
-            if (rbExcluir.Checked)
+            if (txtescolhearquivo.Text == "")
             {
-                File.Delete(caminhoOrigem);
-                MessageBox.Show("Arquivo apagado com exito!", "Sucesso!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-                txtescolhearquivo.Text = "";
+                MessageBox.Show("Escolha um arquivo primeiro!", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
-            if(rbCopiar.Checked)
+            else
             {
-                var caminhoOrigem = txtescolhearquivo;
-                
-                var caminhoDestino = txtdestino;
-                FileInfo fi = new FileInfo(nomedoArquivo);
-                //foreach (string arquivos in Directory.GetFiles(caminhoOrigem.Text, "*.*", SearchOption.AllDirectories))
-                File.Copy(caminhoOrigem.Text, caminhoDestino.Text + "\\" + nomedoArquivo, true);
-
-                MessageBox.Show("Arquivo copiado com exito!", "Sucesso!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-                txtescolhearquivo.Text = "";
-                txtdestino.Text = "";
-            }
-
-            if (rbLer.Checked)
-            {
-                StreamReader arquivo = new StreamReader(caminhoOrigem, Encoding.Default);
-                frmLeituraArquivo conteudo = new frmLeituraArquivo();
-                conteudo.Show();
-                while (!arquivo.EndOfStream)
+                if (rbExcluir.Checked)
                 {
-                    conteudo.lbLeituraArquivo.Items.Add(arquivo.ReadLine());
+                    File.Delete(caminhoOrigem);
+                    MessageBox.Show("Arquivo apagado com exito!", "Sucesso!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                    txtescolhearquivo.Text = "";
                 }
+
+                if (rbCopiar.Checked)
+                {
+                    var caminhoOrigem = txtescolhearquivo;
+                    var caminhoDestino = txtdestino;
+
+                    if (txtdestino.Text == null)
+                    {
+                        MessageBox.Show("Voce precisa escolher um destino!", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+
+                    FileInfo fi = new FileInfo(nomedoArquivo);
+                    File.Copy(caminhoOrigem.Text, caminhoDestino.Text + "\\" + nomedoArquivo, true);
+
+                    MessageBox.Show("Arquivo copiado com exito!", "Sucesso!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                    txtescolhearquivo.Text = "";
+                    txtdestino.Text = "";
+                }
+
+                if (rbLer.Checked)
+                {
+                    using (StreamReader arquivo = new StreamReader(caminhoOrigem, Encoding.UTF8))
+                    {
+                        frmLeituraArquivo conteudo = new frmLeituraArquivo();
+                        conteudo.Show();
+                        while (!arquivo.EndOfStream)
+                        {
+                            conteudo.lbLeituraArquivo.Items.Add(arquivo.ReadLine());
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor selecione uma tarefa", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
+                frmLeituraArquivo fechar = new frmLeituraArquivo();
+                fechar.Close();
+
             }
         }
 
-        private void btnSair_Click(object sender, EventArgs e)
+        private void BtnSair_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void rbCopiar_CheckedChanged(object sender, EventArgs e)
+        private void RbCopiar_CheckedChanged(object sender, EventArgs e)
         {
             if (rbCopiar.Checked)
             {
@@ -82,11 +106,13 @@ namespace TratandoArquivoTexto
                 gbDestino.Visible = false;
         }
 
-        private void btnescolherdestino_Click(object sender, EventArgs e)
+        private void Btnescolherdestino_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog escolher = new FolderBrowserDialog();
-            escolher.Description = "Selecione o destino";
-            escolher.RootFolder = Environment.SpecialFolder.MyComputer;
+            FolderBrowserDialog escolher = new FolderBrowserDialog
+            {
+                Description = "Selecione o destino",
+                RootFolder = Environment.SpecialFolder.MyComputer
+            };
             DialogResult resposta = escolher.ShowDialog();
             if (resposta == DialogResult.OK)
             {

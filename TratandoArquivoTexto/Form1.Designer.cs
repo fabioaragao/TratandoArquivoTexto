@@ -68,7 +68,7 @@
             this.btnescolhaorigem.TabIndex = 1;
             this.btnescolhaorigem.Text = "...";
             this.btnescolhaorigem.UseVisualStyleBackColor = true;
-            this.btnescolhaorigem.Click += new System.EventHandler(this.btnescolhaarquivo_Click);
+            this.btnescolhaorigem.Click += new System.EventHandler(this.Btnescolhaarquivo_Click);
             // 
             // txtescolhearquivo
             // 
@@ -91,7 +91,7 @@
             this.btnSair.TabIndex = 1;
             this.btnSair.Text = "Sair";
             this.btnSair.UseVisualStyleBackColor = true;
-            this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
+            this.btnSair.Click += new System.EventHandler(this.BtnSair_Click);
             // 
             // btnOK
             // 
@@ -102,7 +102,7 @@
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // groupBox2
             // 
@@ -138,7 +138,7 @@
             this.rbCopiar.TabStop = true;
             this.rbCopiar.Text = "Copiar";
             this.rbCopiar.UseVisualStyleBackColor = true;
-            this.rbCopiar.CheckedChanged += new System.EventHandler(this.rbCopiar_CheckedChanged);
+            this.rbCopiar.CheckedChanged += new System.EventHandler(this.RbCopiar_CheckedChanged);
             // 
             // rbLer
             // 
@@ -171,7 +171,7 @@
             this.btnescolherdestino.TabIndex = 2;
             this.btnescolherdestino.Text = "...";
             this.btnescolherdestino.UseVisualStyleBackColor = true;
-            this.btnescolherdestino.Click += new System.EventHandler(this.btnescolherdestino_Click);
+            this.btnescolherdestino.Click += new System.EventHandler(this.Btnescolherdestino_Click);
             // 
             // txtdestino
             // 
